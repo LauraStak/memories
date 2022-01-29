@@ -6,9 +6,9 @@ import postRoute from "./routes/posts.js";
 
 const app = express();
 
-app.use("/posts", postRoute);
-
 app.use(cors());
+
+app.use("/posts", postRoute);
 
 mongoose.connect("mongodb://localhost:27017/memoriesdb");
 
