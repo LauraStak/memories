@@ -16,7 +16,7 @@ const Form = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     dispatch(createPost(postData));
@@ -28,9 +28,11 @@ const Form = () => {
         autoComplete="off"
         noValidate
         className={classes.form}
-        onSubmit={handleChange}
+        onSubmit={handleSubmit}
       >
-        <Typography variant="h6"></Typography>
+        <Typography className={classes.textArea} variant="h6">
+          Creating a memory
+        </Typography>
         <TextField
           className={classes.textArea}
           name="creator"
@@ -66,16 +68,19 @@ const Form = () => {
           className={classes.textArea}
           name="tags"
           variant="outlined"
-          label="Tags"
+          label="Tags (comma separated)"
           fullWidth
           value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          onChange={(e) =>
+            setPostData({ ...postData, tags: e.target.value.split(",") })
+          }
         />
         <div className={classes.fileInput}>
           <FileBase
+            className={classes.textArea}
             type="file"
             multiple={false}
-            onDone={(base64) =>
+            onDone={({ base64 }) =>
               setPostData({ ...postData, selectedFile: base64 })
             }
           />

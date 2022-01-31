@@ -1,7 +1,7 @@
-const reducer = (posts = [], action) => {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default (posts = [], action) => {
   switch (action.type) {
     case "FETCH_ALL":
-      console.log(action.payload);
       return action.payload;
     case "CREATE":
       return [...posts, action.payload];
@@ -9,5 +9,3 @@ const reducer = (posts = [], action) => {
       return posts;
   }
 };
-
-export default reducer;
